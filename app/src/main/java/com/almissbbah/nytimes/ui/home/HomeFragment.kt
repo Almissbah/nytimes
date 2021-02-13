@@ -1,31 +1,44 @@
 package com.almissbbah.nytimes.ui.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.almissbbah.nytimes.R
+import com.almissbbah.nytimes.ui.AppBaseFragment
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : AppBaseFragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    companion object {
+        const val TAG = "HomeFragment"
     }
+
+    private lateinit var mViewModel: HomeViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+
+    override fun initViewModel() {
+        mViewModel =
+            ViewModelProviders.of(
+                this,
+                viewModelFactory
+            )[HomeViewModel::class.java]
+    }
+
+    override fun initViews() {
+    }
+
+    override fun subscribe() {
+    }
+
+    override fun unSubscribe() {
+    }
+
+    override fun onCreateView(): Int {
+        return R.layout.fragment_home
+    }
+
 }

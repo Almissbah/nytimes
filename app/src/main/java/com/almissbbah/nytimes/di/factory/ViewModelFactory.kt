@@ -1,4 +1,4 @@
-package com.almissbah.articles.di.factory
+package com.almissbbah.nytimes.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,31 +1,42 @@
 package com.almissbbah.nytimes.ui.details
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.almissbbah.nytimes.R
+import com.almissbbah.nytimes.ui.AppBaseFragment
+import javax.inject.Inject
 
-class ArticleDetailsFragment : Fragment() {
+class ArticleDetailsFragment : AppBaseFragment() {
 
-    private lateinit var articleDetailsViewModel: ArticleDetailsViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        articleDetailsViewModel =
-            ViewModelProviders.of(this).get(ArticleDetailsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_article_details, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        articleDetailsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    companion object {
+        const val TAG = "ArticleDetailsFragment"
     }
+
+    private lateinit var mViewModel: ArticleDetailsViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override fun initViewModel() {
+        mViewModel =
+            ViewModelProviders.of(
+                this,
+                viewModelFactory
+            )[ArticleDetailsViewModel::class.java]
+    }
+
+    override fun initViews() {
+    }
+
+    override fun subscribe() {
+    }
+
+    override fun unSubscribe() {
+    }
+
+    override fun onCreateView(): Int {
+        return R.layout.fragment_article_details
+    }
+
+
 }

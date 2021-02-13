@@ -1,6 +1,6 @@
 package com.almissbbah.nytimes
 
-import com.almissbah.articles.di.component.DaggerAppComponent
+import com.almissbbah.nytimes.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

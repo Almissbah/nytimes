@@ -3,7 +3,7 @@ package com.almissbbah.nytimes.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.almissbah.articles.di.factory.ViewModelFactory
+import com.almissbbah.nytimes.di.factory.ViewModelFactory
 import com.almissbbah.nytimes.ui.details.ArticleDetailsViewModel
 import com.almissbbah.nytimes.ui.home.HomeViewModel
 import com.almissbbah.nytimes.ui.splash.SplashViewModel
@@ -32,13 +32,13 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
-    abstract fun bindSplashViewModel(mainViewModel: SplashViewModel): ViewModel
+    abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
 
     @Binds
     @IntoMap
     @ViewModelKey(ArticleDetailsViewModel::class)
-    abstract fun bindArticleDetailsViewModel(loginViewModel: ArticleDetailsViewModel): ViewModel
+    abstract fun bindArticleDetailsViewModel(viewModel: ArticleDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap
