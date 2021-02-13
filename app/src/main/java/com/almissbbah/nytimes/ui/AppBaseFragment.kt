@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.almissbbah.nytimes.MainActivity
 import dagger.android.support.DaggerFragment
 
 abstract class AppBaseFragment : DaggerFragment() {
@@ -29,6 +30,9 @@ abstract class AppBaseFragment : DaggerFragment() {
         return inflater.inflate(resId, container, false)
     }
 
+    fun updateToolBarTitle(title: String) {
+        if (isAdded) (this.activity as MainActivity).updateActionBarTitle(title)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

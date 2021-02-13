@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : DaggerAppCompatActivity() {
 
@@ -24,5 +25,7 @@ class MainActivity : DaggerAppCompatActivity() {
         }
     }
 
-
+    fun updateActionBarTitle(title: String) {
+        toolbar.title = title
+    }
 }
