@@ -69,7 +69,7 @@ class HomeFragment : AppBaseFragment() {
         mAdapter = ArticlesAdapter()
         mAdapter!!.mItemClickListener = object : ArticlesAdapter.ItemClickListener {
             override fun onClicked(view: View, article: Article, position: Int) {
-                Log.i(tag, "Article title: ${article.title}")
+                Log.i(tag, "User Selected Article with title: ${article.title}")
                 mViewModel.selectArticle(article)
                 findNavController().navigate(R.id.action_nav_home_to_nav_details)
             }
@@ -118,13 +118,13 @@ class HomeFragment : AppBaseFragment() {
         mViewModel.unSubscribe()
     }
 
-    fun showLoading() {
+    private fun showLoading() {
         hideErrorLayout()
         rvArticles.hide()
         progressBar.unhide()
     }
 
-    fun hideLoading() {
+    private fun hideLoading() {
         progressBar.hide()
     }
 }

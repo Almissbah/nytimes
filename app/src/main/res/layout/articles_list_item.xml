@@ -36,7 +36,7 @@
             tools:text="Some nice title,Some nice title,Some nice title,Some nice title" />
 
         <TextView
-            android:id="@+id/byline"
+            android:id="@+id/tvByline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@{article.publishedDate.trim()}"
             app:layout_constraintEnd_toEndOf="@+id/articleTitle"
-            app:layout_constraintTop_toBottomOf="@+id/byline"
+            app:layout_constraintTop_toBottomOf="@+id/tvByline"
             tools:text="10-10-2010" />
 
         <ImageView

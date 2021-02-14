@@ -7,6 +7,7 @@ import com.almissbbah.nytimes.R
 import com.almissbbah.nytimes.data.remote.model.ArticleDetails
 import com.almissbbah.nytimes.data.remote.model.MediaMetaData
 import com.almissbbah.nytimes.ui.AppBaseFragment
+import com.almissbbah.nytimes.utils.Log
 import com.almissbbah.nytimes.utils.isValidUrl
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_article_details.*
@@ -34,10 +35,7 @@ class ArticleDetailsFragment : AppBaseFragment() {
     override fun initViews() {
         updateToolBarTitle(getString(R.string.article_details_title))
         btnReadFull.setOnClickListener {
-
             mViewModel.openUrlInBrowser(requireContext())
-
-
         }
     }
 
@@ -49,14 +47,16 @@ class ArticleDetailsFragment : AppBaseFragment() {
     }
 
     private fun updateUI(it: ArticleDetails) {
-        tvKeywords.text = it.keywords
-        tvSection.text = "${it.section} ${it.subSection}"
-        tvSource.text = it.source
-        byline.text = it.byline
-        articleTitle.text = it.title
-        articleAbstract.text = it.abstract
-        publishDate.text = it.publishedDate
-        setArticleImage(it.mediaMetadata)
+        with(it) {
+            tvKeywords.text = keywords
+            tvSection.text = "${section} ${subSection}"
+            tvSource.text = source
+            tvByline.text = byline
+            articleTitle.text = title
+            articleAbstract.text = abstract
+            publishDate.text = publishedDate
+            setArticleImage(mediaMetadata)
+        }
     }
 
     private fun setArticleImage(mediaMetadata: MediaMetaData?) {
@@ -65,6 +65,8 @@ class ArticleDetailsFragment : AppBaseFragment() {
                 .with(this)
                 .load(mediaMetadata.url).fitCenter()
                 .into(articleImage)
+        } else {
+            Log.e(tag, "${mediaMetadata?.url} is not a valid Image Url.")
         }
     }
 

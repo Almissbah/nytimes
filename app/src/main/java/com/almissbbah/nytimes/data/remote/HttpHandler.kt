@@ -15,7 +15,7 @@ interface HttpCallback<T> {
     fun onForbidden(errorBody: ErrorBody)
 }
 
-abstract class HttpHandler<T>(val callback: RepoCallback<T>) : HttpCallback<T> {
+abstract class HttpHandler<T>(private val callback: RepoCallback<T>) : HttpCallback<T> {
     override fun onCreated(t: T?) {
         callback.onResult(Resource(t, Resource.Status.FORBIDDEN, ""))
     }
