@@ -13,6 +13,10 @@ and	shows article	details	when	items	on the	list	are	tapped.
 Based on mvvm architecture and repository pattern.
 ![repo pattren image](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
+* The app is following single activiy approche and uses Jetpack's navigation component so all the main views are fragmens and they being replaced in the same activity.
+* Passing the data between the fragments is done using RxBuses.
+
+
 ### The app includes the following main components:
  
 * A web API service.
