@@ -6,8 +6,8 @@ and	shows article	details	when	items	on the	list	are	tapped.
 
 ## App Features
 1. User can list most popular articles in last 7 days.
-2. User can tap on article and view article details.
-3. User can tap read full article in article details screen to launch its URL in web browser .
+2. User can tap on article and view its details.
+3. User can tap read full article in article details screen to launch its URL in the web browser .
 
 ## App architecture
 Based on mvvm architecture and repository pattern.
