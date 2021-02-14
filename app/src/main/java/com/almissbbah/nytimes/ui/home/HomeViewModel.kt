@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(private val popularArticlesRepository: P
     private var mLatestRequest: PopularArticlesRequest? = null
     val tag = "HomeViewModel"
 
-    enum class Action { SHOW_LOADING, SHOW_ARTICLES_LIST, SHOW_CONNECTION_ERROR, SHOW_AUTH_ERROR }
+    enum class Action { SHOW_LOADING, SHOW_ARTICLES_LIST, SHOW_CONNECTION_ERROR, SHOW_SERVER_ERROR }
 
     private var mDisposable: Disposable? = null
     private val _articles = MutableLiveData<Resource<List<Article>, Action>>()
@@ -40,42 +40,54 @@ class HomeViewModel @Inject constructor(private val popularArticlesRepository: P
                 override fun onResult(result: Resource<PopularArticlesApiResponse, Resource.Status>) {
                     when (result.action) {
                         Resource.Status.SUCCESS -> {
-                            Log.d(
-                                tag,
-                                "Resource.Status.SUCCESS : list size =${result.payload!!.articles.size}"
-                            )
-                            _articles.postValue(
-                                Resource(
-                                    result.payload.articles,
-                                    Action.SHOW_ARTICLES_LIST,
-                                    ""
-                                )
-                            )
+                            handleSuccessState(result)
                         }
-                        Resource.Status.CONNECTION_ERROR, Resource.Status.FAIL,
+                        Resource.Status.CONNECTION_ERROR -> {
+                            handleConnectionErrorState()
+                        }
+                        Resource.Status.FORBIDDEN, Resource.Status.FAIL,
                         Resource.Status.SERVER_ERROR, Resource.Status.NOT_FOUND -> {
-                            Log.e(tag, "CONNECTION_ERROR")
-                            _articles.postValue(
-                                Resource(
-                                    null,
-                                    Action.SHOW_CONNECTION_ERROR,
-                                    "Connection failed, Please check your internet and try again."
-                                )
-                            )
-                        }
-                        Resource.Status.FORBIDDEN -> {
-                            Log.e(tag, "FORBIDDEN")
-                            _articles.postValue(
-                                Resource(
-                                    null,
-                                    Action.SHOW_AUTH_ERROR,
-                                    "Authentication failed."
-                                )
-                            )
+                            handleServerErrorState()
                         }
                     }
                 }
             })
+    }
+
+    private fun handleServerErrorState() {
+        Log.e(tag, "FORBIDDEN")
+        _articles.postValue(
+            Resource(
+                null,
+                Action.SHOW_SERVER_ERROR,
+                "Error from server."
+            )
+        )
+    }
+
+    private fun handleConnectionErrorState() {
+        Log.e(tag, "CONNECTION_ERROR")
+        _articles.postValue(
+            Resource(
+                null,
+                Action.SHOW_CONNECTION_ERROR,
+                "Connection failed, Please check your internet and try again."
+            )
+        )
+    }
+
+    private fun handleSuccessState(result: Resource<PopularArticlesApiResponse, Resource.Status>) {
+        Log.d(
+            tag,
+            "Resource.Status.SUCCESS : list size =${result.payload!!.articles.size}"
+        )
+        _articles.postValue(
+            Resource(
+                result.payload.articles,
+                Action.SHOW_ARTICLES_LIST,
+                ""
+            )
+        )
     }
 
     private fun showLoading() {

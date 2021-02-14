@@ -38,7 +38,7 @@ class HomeFragment : AppBaseFragment() {
             HomeViewModel.Action.SHOW_LOADING -> showLoading()
             HomeViewModel.Action.SHOW_ARTICLES_LIST -> updateArticlesList(t.payload)
             HomeViewModel.Action.SHOW_CONNECTION_ERROR -> showConnectionError()
-            HomeViewModel.Action.SHOW_AUTH_ERROR -> showAuthError()
+            HomeViewModel.Action.SHOW_SERVER_ERROR -> showAuthError()
         }
     }
 
