@@ -15,6 +15,7 @@ Based on mvvm architecture and repository pattern.
 
 * The app is following single activiy approche and uses Jetpack's navigation component so all the main views are fragmens and they being replaced in the same activity.
 * Passing the data between the fragments is done using RxBuses.
+* All the fragements are extending AppBaseFragment which will handle initilizing the views, subscribing/unsubscribing in view models and updating the UI using abstract methods
 
 
 ### The app includes the following main components:
