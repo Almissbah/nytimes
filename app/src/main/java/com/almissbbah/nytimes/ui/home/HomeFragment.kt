@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.almissbbah.nytimes.R
 import com.almissbbah.nytimes.data.Resource
@@ -69,7 +70,8 @@ class HomeFragment : AppBaseFragment() {
         mAdapter!!.mItemClickListener = object : ArticlesAdapter.ItemClickListener {
             override fun onClicked(view: View, article: Article, position: Int) {
                 Log.i(tag, "Article title: ${article.title}")
-
+                mViewModel.selectArticle(article)
+                findNavController().navigate(R.id.action_nav_home_to_nav_details)
             }
         }
         rvArticles.adapter = mAdapter

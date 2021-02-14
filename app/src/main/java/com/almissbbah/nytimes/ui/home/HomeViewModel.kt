@@ -11,6 +11,7 @@ import com.almissbbah.nytimes.data.remote.model.PopularArticlesRequest
 import com.almissbbah.nytimes.data.repo.PopularArticlesRepository
 import com.almissbbah.nytimes.data.repo.RepoCallback
 import com.almissbbah.nytimes.utils.Log
+import com.almissbbah.nytimes.utils.RxArticleHolder
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -94,6 +95,11 @@ class HomeViewModel @Inject constructor(private val popularArticlesRepository: P
 
     fun retry() {
         getPopularArticles(mLatestRequest ?: PopularArticlesRequest())
+    }
+
+    fun selectArticle(article: Article) {
+        RxArticleHolder.selectArticle(article)
+
     }
 
 
