@@ -17,7 +17,7 @@ Based on mvvm architecture and repository pattern.
  
 * A web API service.
 * A repository that works with the API service to provide a unified data interface.
-* A dependacy injection framework to handly the services and ViewModels creation and injection.
+* A dependacy injection framework to handlw the services, repositories and ViewModels creation and injection.
 * ViewModels that provide data specific to the UI using RxJava and LiveData.
 * The UI, which shows a visual representation of the data in the ViewModel.
 
@@ -25,11 +25,17 @@ Based on mvvm architecture and repository pattern.
 * **data** - contains:
   * **repo** -  repository classes for handling app data.
   * **remote** - contains classes needed for making API calls to NyTimes server using Retrofit.
+   * **RequestInterceptor** - An Interceptor to inject the API key in all requests.
+   * **CallbackWrapper/HttpCallback** - Rx Callback wrapper to handle http responses and convert them into callbacks.
+    
+  
 * **di** - contains dependency injection classes, using Dagger2.
 * **ui** - contains classes needed to display Activities and Fragments.
-* **utils** - contains app constants and Utils classes and extention functions.
-  * **RxArticleHolder** Reactive source for in app messaging.
+  * **ArticlesDiffCallback** - DiffUtils callback to optimize the recycler view.
 
+* **utils** - contains app constants and Utils classes and extention functions.
+  * **RxArticleHolder** Reactive source for in app messaging and updating the fragments from diffrent threads.
+  * **ExtFunctions** Extention functions for Android views and Strings.
 
 
 
